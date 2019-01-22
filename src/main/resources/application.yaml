@@ -1,0 +1,22 @@
+spring:
+  redisson:
+    url: redis://redis:6379 #redis://127.18.0.3:6379 #docker network zen 中的redis
+    database: 0
+
+  datasource:
+    url: jdbc:mysql://mysql57:3306/goods #jdbc:mysql://127.18.0.2:3306/goods #docker network zen 中的mysql
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  configuration:
+    cache-enabled: true
+    call-setters-on-nulls: true
+server:
+  port: 8090
+
+
+
+
+

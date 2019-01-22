@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.zen.mapper.BookMapper">
+    <resultMap id="book_mapper" type="com.boot.zen.bean.Book">
+        <result column="bookId" property="bookId"/>
+        <result column="author" property="author"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+    </resultMap>
+
+    <!--
+        开启本mapper下的二级缓存（一级缓存基于sqlSession，二级缓存是基于Application Mapper），
+        本mapper内的所有select结果均会被缓存
+        本mapper内的所有insert update delete均会刷新缓存
+
+    -->
+    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"></cache>
+    <sql id="book_column">bookId, author, `name`, description, price</sql>
+
+    <!--单个select可以使用useCache来决定是否使用二级缓存-->
+    <select id="listAllBooks" resultMap="book_mapper" useCache="true">
+        SELECT <include refid="book_column"/> FROM book
+    </select>
+</mapper>
